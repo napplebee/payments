@@ -82,7 +82,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATIC_ROOT = '/home/napplebee/webapps/static/'
-STATIC_ROOT = '/Users/sbelikov/Projects/PAY_ENV/payments/static/'
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -92,4 +91,5 @@ STATICFILES_DIRS = (
         os.path.dirname(__file__),
         'static',
     ),
+    '/home/napplebee/webapps/static/'
 )
