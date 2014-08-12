@@ -12,7 +12,7 @@ def index(request):
     tag.name = "Common"
     tag.created = datetime.date.today()
     tags_list = [tag]
-    template = loader.get_template('index.html')
+    template = loader.get_template('base.html')
     context = RequestContext(request, {
         'tags_list': tags_list,
     })
