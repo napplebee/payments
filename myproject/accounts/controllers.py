@@ -26,7 +26,8 @@ class AccountController:
                 # ...
                 return HttpResponseRedirect('/acc/')  # Redirect after POST
             else:
-                form.name.error_messages = 'Name is required field'
+                pass
+                #custom errors
         else:
             form = CreateAccountForm()  # An unbound form
 
