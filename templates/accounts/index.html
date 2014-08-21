@@ -6,4 +6,9 @@
         <a href="{% url "acc:create" %}" role="button" class="btn btn-success navbar-btn btn-sm">Create new...</a>
     </h1>
 </div>
+<ul>
+    {% for acc in accs %}
+    <li>{{ acc.name }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

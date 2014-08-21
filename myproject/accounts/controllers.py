@@ -12,24 +12,29 @@ from myproject.settings import BASE_DIR, TEMPLATE_DIRS
 class AccountController:
     @staticmethod
     def index(request):
+        accounts = Account.objects.all()
         template = loader.get_template('accounts/index.html')
         context = RequestContext(request)
-        return HttpResponse(template.render(context))
+        return render(request, 'accounts/index.html', {
+            'accs': accounts
+        })
 
     @staticmethod
     def create(request):
-        if request.method == 'POST':  # If the form has been submitted...
-            # ContactForm was defined in the previous section
-            form = CreateAccountForm(request.POST)  # A form bound to the POST data
-            if form.is_valid(): # All validation rules pass
-                # Process the data in form.cleaned_data
-                # ...
-                return HttpResponseRedirect('/acc/')  # Redirect after POST
-            else:
-                pass
-                #custom errors
+        if request.method == 'POST':
+            form = CreateAccountForm(request.POST)
+            if form.is_valid():
+                acc = Account(
+                    name=form.cleaned_data["name"],
+                    view_order=form.cleaned_data["view_order"],
+                    is_default=form.cleaned_data["is_default"],
+                    is_hidden=form.cleaned_data["is_hidden"],
+                    created=datetime.datetime.now()
+                )
+                acc.save()
+                return HttpResponseRedirect('/acc/')
         else:
-            form = CreateAccountForm()  # An unbound form
+            form = CreateAccountForm()
 
         action = 'Create'
         return render(request, 'accounts/create.html', {
